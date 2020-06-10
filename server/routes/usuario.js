@@ -17,10 +17,15 @@ app.post('/usuario', function(req, res) {
         if (err) {
             return res.status(400).json({
                 ok: false,
-                err
+                error: {
+                    code: 'R-1',
+                    message: 'El email ya se encuentra asociado a otra cuenta',
+                }
             });
         }
-        // usuarioDB.password = null;
+
+
+
         res.json({
             ok: true,
             usuario: usuarioDB

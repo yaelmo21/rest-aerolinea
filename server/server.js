@@ -10,13 +10,15 @@ const app = express();
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(cors());
+// parse application/json
+app.use(bodyParser.json());
 //Configuración global de rutas
 app.use(require('./routes/index'));
 
-app.use(cors());
 
-// parse application/json
-app.use(bodyParser.json())
+
+
 
 app.get('/', (req, res) => {
     res.json({
@@ -46,6 +48,8 @@ app.get('/', (req, res) => {
 
 app.get('/vuelos', (req, res) => {
     let body = req.body;
+
+
     db.query('SELECT * FROM VUELO WHERE ORIGEN=? AND DESTINO= ? AND FECHA=?', [body.origin, body.destination, body.date], (err, result, fields) => {
         if (err) {
             return res.status(400).json({
@@ -54,6 +58,8 @@ app.get('/vuelos', (req, res) => {
             });
         }
 
+        console.log(body, 'Body');
+        console.log(req.query, 'Query');
 
         res.json(result);
     })

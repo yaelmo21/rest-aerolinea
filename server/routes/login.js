@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.CLIENT_ID);
 const Usuario = require('../models/usuario');
+const { verificarToken } = require('../middlewares/autenticacion');
 const app = express();
 
 app.post('/login', (req, res) => {
@@ -149,7 +150,11 @@ app.post('/google', async(req, res) => {
 
     })
 
-})
+});
+
+app.post('/verificar', verificarToken, (req, res) => {
+    res.json(req.usuario);
+});
 
 
 module.exports = app;
