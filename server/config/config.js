@@ -16,9 +16,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 let urlDB;
 
 if (process.env.NODE_ENV === 'dev') {
-    urlDB = 'mongodb+srv://user_node:BtB9R3ZKQkR5lYSy@cluster0-njfld.mongodb.net/iaero';
+    urlDB = '';
 } else {
-    urlDB = 'mongodb+srv://user_node:BtB9R3ZKQkR5lYSy@cluster0-njfld.mongodb.net/iaero';
+    urlDB = '';
 }
 process.env.URLDB = urlDB;
 
