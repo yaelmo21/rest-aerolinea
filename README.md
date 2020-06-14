@@ -8,4 +8,4 @@ Se deben instalar los paquetes de node
 npm install
 ```
 
-Despliegue en [Herok] (https://iaero.herokuapp.com)
+Despliegue en [Heroku] (https://iaero.herokuapp.com)
