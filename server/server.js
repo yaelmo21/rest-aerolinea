@@ -4,9 +4,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const db = require('./DB/database').conexion;
+const DataBaseMyslq = require('./DB/database')
 const app = express();
 
+const db = new DataBaseMyslq();
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -50,7 +51,7 @@ app.get('/vuelos', (req, res) => {
     let body = req.body;
 
 
-    db.query('SELECT * FROM VUELO WHERE ORIGEN=? AND DESTINO= ? AND FECHA=?', [body.origin, body.destination, body.date], (err, result, fields) => {
+    db.getConnection().query('SELECT * FROM VUELO WHERE ORIGEN=? AND DESTINO= ? AND FECHA=?', [body.origin, body.destination, body.date], (err, result, fields) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -58,8 +59,7 @@ app.get('/vuelos', (req, res) => {
             });
         }
 
-        console.log(body, 'Body');
-        console.log(req.query, 'Query');
+        console.log(result[0].NUMERO);
 
         res.json(result);
     })
@@ -67,14 +67,12 @@ app.get('/vuelos', (req, res) => {
 
 
 
-db.connect(function(err) {
-    if (err) console.log('No es posible conectar a la base de datos'.red);
-    else console.log('Conexión establecida'.blue);
-});
+
 
 app.listen(process.env.PORT, () => {
     console.log('Escuchando en el puerto'.magenta, process.env.PORT);
 });
+
 
 mongoose.connect(process.env.URLDB, {
     useNewUrlParser: true,
