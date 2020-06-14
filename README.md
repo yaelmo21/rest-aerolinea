@@ -9,3 +9,5 @@ npm install
 ```
 
 Despliegue en [Heroku](https://iaero.herokuapp.com)
+
+[PostMan Documentacion](https://documenter.getpostman.com/view/11031552/SzzheyCk?version=latest)
